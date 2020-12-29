@@ -10,7 +10,8 @@ const io = socket(server, {
     // below are engine.IO options
     pingInterval: 10000,
     pingTimeout: 5000,
-    cookie: false
+    cookie: false,
+    cors:'*'
 });
 web.get('/',(req,res)=>{
     res.end("hello from bot!")

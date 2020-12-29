@@ -3,13 +3,13 @@ const BOT_TOKEN = "1074295711:AAGJeSbZLe9b0D6erBscgJokTfP2XrXzYtk"
 const bot = new TelegramBot(BOT_TOKEN, { polling: true })
 const commandList = [
     {
-        cmd: '/help', desc: '查看机器人的使用说明', output() { return ''; }
+        cmd: '/help', desc: '查看机器人的使用说明', output() { return 'i can help you'; }
     },
     {
-        cmd: '/status', desc: '查看机器人的状态', output: '',
+        cmd: '/status', desc: '查看机器人的状态', output: 'I am running',
     },
     {
-        cmd: '/create', desc: '创建一个对话', output: '',
+        cmd: '/create', desc: '创建一个对话', output: 'hello',
     },
     {
         cmd: '/hello', desc: '和机器人打招呼', output: (message) => {
@@ -18,7 +18,7 @@ const commandList = [
     }
 ]
 commandList.forEach(commamd=>{
-    const reg = new RegExp(commamd.cmd + "(.+)")
+    const reg = new RegExp("\\" + commamd.cmd + " (.+)")
     bot.onText(reg, (msg, match) => {
         // 'msg' is the received Message from Telegram
         // 'match' is the result of executing the regexp above on the text content
@@ -32,8 +32,10 @@ commandList.forEach(commamd=>{
       });
 })
 bot.on('message', (msg) => {
+    console.log(msg);
     const chatId = msg.chat.id;
+    const {chat,from,message_id,text,caption} = msg;
     // send a message to the chat acknowledging receipt of their message
-    bot.sendMessage(chatId, '你的消息暂时无法处理:' + msg);
+    bot.sendMessage(chatId, '你的消息暂时无法处理:' + text);
   });
 module.exports = bot

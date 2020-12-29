@@ -3,7 +3,7 @@ const BOT_TOKEN = "1074295711:AAGJeSbZLe9b0D6erBscgJokTfP2XrXzYtk"
 const bot = new TelegramBot(BOT_TOKEN, { polling: true })
 const commandList = [
     {
-        cmd: '/help', desc: '查看机器人的使用说明', output() { return 'i can help you'; }
+        cmd: '/help', desc: '查看机器人的使用说明', output() { return 'i can help'; }
     },
     {
         cmd: '/status', desc: '查看机器人的状态', output: 'I am running',
@@ -18,7 +18,7 @@ const commandList = [
     }
 ]
 commandList.forEach(commamd=>{
-    const reg = new RegExp("\\" + commamd.cmd + " (.+)")
+    const reg = new RegExp("\\" + commamd.cmd + "(.*)")
     bot.onText(reg, (msg, match) => {
         // 'msg' is the received Message from Telegram
         // 'match' is the result of executing the regexp above on the text content
